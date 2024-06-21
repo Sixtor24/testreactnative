@@ -6,10 +6,9 @@ interface Product {
   imageUrl: string;
   category: string;
   price: number;
-  color: string; // Nuevo campo para el color del producto
+  color: string;
 }
 
-// Definición de los colores para cada categoría
 const categoryColors: Record<string, string> = {
   beauty: '#fff7ee',
   electronics: '#f5e0ff',
@@ -18,13 +17,11 @@ const categoryColors: Record<string, string> = {
   default: '#eaf9ff',
 };
 
-// Función para obtener el color basado en la categoría
 const getColorForCategory = (category: string, index: number): string => {
   const categories = Object.keys(categoryColors);
   const numCategories = categories.length;
   const cycleIndex = index % numCategories;
 
-  // Prioriza los primeros 5 colores y luego se cicla
   if (index < numCategories) {
     return categoryColors[categories[cycleIndex]];
   } else {
@@ -41,7 +38,7 @@ export const fetchProducts = async (): Promise<Product[]> => {
       imageUrl: product.thumbnail,
       category: product.category,
       price: product.price,
-      color: getColorForCategory(product.category, index), // Asignación de color basado en la categoría
+      color: getColorForCategory(product.category, index),
     }));
   } catch (error) {
     console.error('Failed to fetch products:', error);
